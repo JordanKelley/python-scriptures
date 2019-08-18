@@ -22,14 +22,14 @@ class Text:
             # set instance compiled scripture reference regex
             self.scripture_re = re.compile(
                 r'\b(?P<BookTitle>%s)\s*' \
-                 '(?P<ChapterNumber>\d{1,3})' \
-                 '(?:\s*:\s*(?P<VerseNumber>\d{1,3}))?' \
-                 '(?:\s*[-\u2013\u2014]\s*' \
-                 '(?P<EndChapterNumber>\d{1,3}(?=\s*:\s*))?' \
-                 '(?:\s*:\s*)?' \
-                 '(?P<EndVerseNumber>\d{1,3})?' \
-                 ')?' % (self.book_re_string,), re.IGNORECASE | re.UNICODE)
-
+                '(?P<ChapterNumber>\d{1,3})' \
+                '(?:\s*:\s*(?P<VerseNumber>\d{1,3}))?' \
+                '(?:\s*[a-zA-Z]\s*)?' \
+                '(?:\s*[-\u2013\u2014]\s*' \
+                '(?P<EndChapterNumber>\d{1,3}(?=\s*:\s*))?' \
+                '(?:\s*:\s*)?' \
+                '(?P<EndVerseNumber>\d{1,3})?' \
+                ')?' % (self.book_re_string,), re.IGNORECASE | re.UNICODE)
         else:
             raise Exception('Text has no "books"')
 
@@ -149,10 +149,10 @@ class Text:
             or (end_chapter and end_verse > book[3][end_chapter-1])
             or (chapter == end_chapter and end_verse < verse))):
             raise InvalidReferenceException()
-        
+
         if not verse:
             return (book[0], chapter, 1, chapter, book[3][chapter-1])
-        if not end_verse: 
+        if not end_verse:
             if end_chapter and end_chapter != chapter:
                 end_verse = book[3][end_chapter-1]
             else:
