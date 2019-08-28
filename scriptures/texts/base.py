@@ -117,7 +117,6 @@ class Text:
                 sets.append((groups[0], groups[17] if groups[17] else groups[1], groups[18], groups[19], groups[20]))
             if groups[21] or groups[22] or groups[23] or groups[24]:
                 sets.append((groups[0], groups[21] if groups[21] else groups[1], groups[22], groups[23], groups[24]))
-            print(sets)
             for set in sets:
                 try:
                     references.append(self.normalize_reference(*set))
