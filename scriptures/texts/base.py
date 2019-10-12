@@ -31,7 +31,7 @@ class Text:
                 '(?:\s*[-\u2013\u2014]\s*' \
                 '(?P<EndChapterNumber>\d{1,3}(?=\s*:\s*))?' \
                 '(?:\s*:\s*)?' \
-                '(?P<EndVerseNumber>\d{1,3})?' \
+                '(?P<EndVerseNumber>\d{1,3}|end)?' \
                 ')?'
 
                 '(?:\s*[,;]\s*)?' \
@@ -41,7 +41,7 @@ class Text:
                 '(?:\s*[-\u2013\u2014]\s*' \
                 '(?P<EndChapterNumber2>\d{1,3}(?=\s*:\s*))?' \
                 '(?:\s*:\s*)?' \
-                '(?P<EndVerseNumber2>\d{1,3})?' \
+                '(?P<EndVerseNumber2>\d{1,3}|end)?' \
                 ')?'
 
                 '(?:\s*[,;]\s*)?' \
@@ -51,7 +51,7 @@ class Text:
                 '(?:\s*[-\u2013\u2014]\s*' \
                 '(?P<EndChapterNumber3>\d{1,3}(?=\s*:\s*))?' \
                 '(?:\s*:\s*)?' \
-                '(?P<EndVerseNumber3>\d{1,3})?' \
+                '(?P<EndVerseNumber3>\d{1,3}|end)?' \
                 ')?'
 
                 '(?:\s*[,;]\s*)?' \
@@ -61,7 +61,7 @@ class Text:
                 '(?:\s*[-\u2013\u2014]\s*' \
                 '(?P<EndChapterNumber4>\d{1,3}(?=\s*:\s*))?' \
                 '(?:\s*:\s*)?' \
-                '(?P<EndVerseNumber4>\d{1,3})?' \
+                '(?P<EndVerseNumber4>\d{1,3}|end)?' \
                 ')?'
 
                 '(?:\s*[,;]\s*)?' \
@@ -71,7 +71,7 @@ class Text:
                 '(?:\s*[-\u2013\u2014]\s*' \
                 '(?P<EndChapterNumber5>\d{1,3}(?=\s*:\s*))?' \
                 '(?:\s*:\s*)?' \
-                '(?P<EndVerseNumber5>\d{1,3})?' \
+                '(?P<EndVerseNumber5>\d{1,3}|end)?' \
                 ')?'
 
                 '(?:\s*[,;]\s*)?' \
@@ -81,7 +81,7 @@ class Text:
                 '(?:\s*[-\u2013\u2014]\s*' \
                 '(?P<EndChapterNumber6>\d{1,3}(?=\s*:\s*))?' \
                 '(?:\s*:\s*)?' \
-                '(?P<EndVerseNumber6>\d{1,3})?' \
+                '(?P<EndVerseNumber6>\d{1,3}|end)?' \
                 ')?'
                 % (self.book_re_string,), re.IGNORECASE | re.UNICODE)
 
@@ -97,6 +97,10 @@ class Text:
                 return book
 
         return None
+
+    def get_end_verse(self, book, chapter):
+        return book[3][chapter-1]
+
 
     def extract(self, text):
         """
@@ -204,6 +208,8 @@ class Text:
         chapter = int(chapter) if chapter else None
         verse = int(verse) if verse else None
         end_chapter = int(end_chapter) if end_chapter else chapter
+        if end_verse == 'end':
+            end_verse = self.get_end_verse(book, end_chapter if end_chapter else chapter)
         end_verse = int(end_verse) if end_verse else None
         if not book \
                 or (chapter is None or chapter < 1 or chapter > len(book[3])) \
