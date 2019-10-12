@@ -1,8 +1,11 @@
-from .texts.protestant import ProtestantCanon
+from .texts.kjv1611 import KingJames1611
 
 # create an instance of the Protestant Canon to use as the default
-pcanon=ProtestantCanon()
+canon=KingJames1611()
 
-book_re = pcanon.book_re
-scripture_re = pcanon.scripture_re
+
+book_re = canon.book_re
+scripture_re = canon.scripture_re
+
+
 
