@@ -85,6 +85,8 @@ class Text:
                 ')?'
                 % (self.book_re_string,), re.IGNORECASE | re.UNICODE)
 
+            self.only_book_re= re.compile(r'\b(?P<BookTitle>%s)\b' % (self.book_re_string,), re.IGNORECASE | re.UNICODE)
+
         else:
             raise Exception('Text has no "books"')
 
@@ -126,6 +128,12 @@ class Text:
                     references.append(self.normalize_reference(*set))
                 except InvalidReferenceException:
                     pass
+        if not references:
+            match = re.match(self.only_book_re, text)
+            if match:
+                groups = match.groups()
+                if groups:
+                    references.append(self.normalize_reference(*(groups[0],)))
         return references
 
     def is_valid_reference(self, bookname, chapter, verse=None,
@@ -171,13 +179,16 @@ class Text:
                 else:  # multi-chapter, multi-verse ref
                     return '{0} {1}:{2}-{3}:{4}'.format(bn, c, v, ec, ev)
 
-    def normalize_reference(self, bookname, chapter, verse=None,
+    def normalize_reference(self, bookname, chapter=None, verse=None,
                             end_chapter=None, end_verse=None):
         """
         Get a complete five value tuple scripture reference with full book name
         from partial data
         """
         book = self.get_book(bookname)
+
+        if not chapter:
+            return (book[0], 1, 1, len(book[3]), book[3][len(book[3])-1])
 
         # SPECIAL CASES FOR: BOOKS WITH ONE CHAPTER AND MULTI-CHAPTER REFERENCES
 
