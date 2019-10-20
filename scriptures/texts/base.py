@@ -188,7 +188,7 @@ class Text:
         book = self.get_book(bookname)
 
         if not chapter:
-            return (book[0], 1, 1, len(book[3]), book[3][len(book[3])-1])
+            return (book[0], 1, 1, len(book[3]), book[3][len(book[3])-1], book[4])
 
         # SPECIAL CASES FOR: BOOKS WITH ONE CHAPTER AND MULTI-CHAPTER REFERENCES
 
@@ -236,7 +236,7 @@ class Text:
             raise InvalidReferenceException()
 
         if not verse:
-            return (book[0], chapter, 1, chapter, book[3][chapter - 1])
+            return (book[0], chapter, 1, chapter, book[3][chapter - 1], book[4])
         if not end_verse:
             if end_chapter and end_chapter != chapter:
                 end_verse = book[3][end_chapter - 1]
@@ -244,6 +244,6 @@ class Text:
                 end_verse = verse
         if not end_chapter:
             end_chapter = chapter
-        return (book[0], chapter, verse, end_chapter, end_verse)
+        return (book[0], chapter, verse, end_chapter, end_verse, book[4])
 
 

@@ -15,12 +15,12 @@ class KingJames1611(Text):
     books.update(Deuterocanon.books)
     books.update({
         '1esd': ('I Esdras', '1Esd', '(?:(?:1|I)(?:\s)?)Esd(?:ras)?',
-                 [58, 30, 24, 63, 73, 34, 15, 96, 55]),
+                 [58, 30, 24, 63, 73, 34, 15, 96, 55], "AP"),
         '2esd': ('II Esdras', '2Esd', '(?:(?:2|II)(?:\s)?)Esd(?:ras)?',
                  [40, 48, 36, 52, 56, 59, 70, 63,
-                  47, 59, 46, 51, 58, 48, 63, 78]),
+                  47, 59, 46, 51, 58, 48, 63, 78], "AP"),
         'prman': ('Prayer of Manasseh', 'prman',
                   'prman|(?:prayer of )?manasseh',
-                  [15]),
+                  [15], "AP"),
     })
 
