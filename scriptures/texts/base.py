@@ -154,7 +154,7 @@ class Text:
         """
         book = None
 
-        bn, c, v, ec, ev = self.normalize_reference(bookname, chapter, verse,
+        bn, c, v, ec, ev, tmt = self.normalize_reference(bookname, chapter, verse,
                                                     end_chapter, end_verse)
 
         book = self.get_book(bn)
