@@ -137,7 +137,7 @@ class Text:
         return references
 
     def is_valid_reference(self, bookname, chapter, verse=None,
-                           end_chapter=None, end_verse=None):
+                           end_chapter=None, end_verse=None, testament=None):
         """
         Check to see if a scripture reference is valid
         """
@@ -148,7 +148,7 @@ class Text:
             return False
 
     def reference_to_string(self, bookname, chapter, verse=None,
-                            end_chapter=None, end_verse=None):
+                            end_chapter=None, end_verse=None, testament=None):
         """
         Get a display friendly string from a scripture reference
         """
@@ -180,7 +180,7 @@ class Text:
                     return '{0} {1}:{2}-{3}:{4}'.format(bn, c, v, ec, ev)
 
     def normalize_reference(self, bookname, chapter=None, verse=None,
-                            end_chapter=None, end_verse=None):
+                            end_chapter=None, end_verse=None, testament=None):
         """
         Get a complete five value tuple scripture reference with full book name
         from partial data

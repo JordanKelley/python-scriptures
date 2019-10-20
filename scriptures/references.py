@@ -25,7 +25,7 @@ def extract(text):
     return canon.extract(text)
 
 def is_valid_reference(bookname, chapter, verse=None,
-                                 end_chapter=None, end_verse=None):
+                                 end_chapter=None, end_verse=None, testament=None):
     """
     Check to see if a scripture reference is valid
     """
@@ -33,7 +33,7 @@ def is_valid_reference(bookname, chapter, verse=None,
             end_verse)
 
 def reference_to_string(bookname, chapter, verse=None,
-                        end_chapter=None, end_verse=None):
+                        end_chapter=None, end_verse=None, testament=None):
     """
     Get a display friendly string from a scripture reference
     """
@@ -41,7 +41,7 @@ def reference_to_string(bookname, chapter, verse=None,
             end_chapter, end_verse)
 
 def normalize_reference(bookname, chapter, verse=None,
-                                  end_chapter=None, end_verse=None):
+                                  end_chapter=None, end_verse=None, testament=None):
     """
     Get a complete five value tuple scripture reference with full book name
     from partial data
