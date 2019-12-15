@@ -22,7 +22,7 @@ class Deuterocanon(Text):
                         39, 23, 22, 47, 28, 14, 10, 41, 32, 13
                     ], "DC"),
 
-        'wis': ('The Wisdom of Solomon', 'Wis',
+        'wis': ('Wisdom', 'Wis',
                 '(?:The )?Wis(?:dom(?: of Solomon)?)?',
                 [
                     16, 24, 19, 20, 23, 25, 30, 20, 18,
